@@ -77,4 +77,4 @@ $(cat "${LOGFILE}")"
 fi
 
 cat "${LOGFILE}"
-rf -rf "${LOGFILE}" "${DATAFILE}"
+rm -rf "${LOGFILE}" "${DATAFILE}"
