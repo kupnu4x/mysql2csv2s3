@@ -1,5 +1,6 @@
 #!/bin/bash
 
+docker pull kupnu4x/etl
 docker run --rm --name test \
 -e MYSQL_HOST=172.17.0.1 \
 -e MYSQL_USER=sbermarket-test-etl \
@@ -11,4 +12,4 @@ docker run --rm --name test \
 -e S3_SECRET_KEY=my_secret_key \
 -e S3_HOST=s3.amazonaws.com \
 -e S3_HOST_BUCKET="%(bucket)s.s3.amazonaws.com" \
--ti -d kupnu4x/etl
+-ti kupnu4x/etl
