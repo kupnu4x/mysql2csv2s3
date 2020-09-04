@@ -22,7 +22,7 @@ mail(){
 From: ${EMAIL_FROM}
 Subject: ${subj}
 
-${body}" | msmtp --EMAIL_FROM="${EMAIL_FROM}" --EMAIL_HOST="${EMAIL_HOST}" "${EMAIL_TO}"
+${body}" | msmtp --from="${EMAIL_FROM}" --host="${EMAIL_HOST}" "${EMAIL_TO}"
 }
 if [[ -z "${MYSQL_HOST}" || \
   -z "${MYSQL_USER}" || \
