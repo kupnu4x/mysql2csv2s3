@@ -45,7 +45,7 @@ if [[ -z "${S3_HOST_BUCKET}" ]]; then
 fi
 
 LOGFILE=$(mktemp)
-#MYSQL_HOST,MYSQL_PWD EMAIL_FROM env
+#MYSQL_HOST,MYSQL_PWD from env
 mysql -u "${MYSQL_USER}" "${MYSQL_DBNAME}" -e 'quit' >>"${LOGFILE}" 2>&1
 if [ $? -ne 0 ]; then
   mail "etl error" "cant connect to mysql. some info:
