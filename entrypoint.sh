@@ -62,7 +62,7 @@ $(cat "${LOGFILE}")"
   exit 1
 fi
 
-sed -e 's/"/""/g' -e "s/\t/\",\"/g;s/^/\"/;s/$/\"/" -e 's/\\t/\t/g;s/\\n/\n/g' "${DATAFILE}" | \
+sed -e 's/"/""/g' -e "s/\t/\",\"/g;s/^/\"/;s/$/\"/" -e 's/\\t/ /g;s/\\n/\n/g' "${DATAFILE}" | \
 gzip | \
 s3cmd put - "${S3_FILE_PATH}" \
   --access_key="${S3_ACCESS_KEY}" \
