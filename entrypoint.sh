@@ -23,7 +23,8 @@ if [[ -z "${S3_HOST_BUCKET}" ]]; then
   S3_HOST_BUCKET="%(bucket)s.s3.amazonaws.com"
 fi
 
-mysql -u "${MYSQL_USER}" "${MYSQL_DBNAME}" -B -s -e "${MYSQL_QUERY}" | \ #MYSQL_HOST,MYSQL_PWD from env
+#MYSQL_HOST,MYSQL_PWD from env
+mysql -u "${MYSQL_USER}" "${MYSQL_DBNAME}" -B -s -e "${MYSQL_QUERY}" | \
   sed -e 's/"/""/g' -e "s/\t/\",\"/g;s/^/\"/;s/$/\"/" -e 's/\\t/\t/g;s/\\n/\n/g' | \
   gzip | \
   s3cmd put - "${S3_FILE_PATH}" \
