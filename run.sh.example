@@ -12,4 +12,7 @@ docker run --rm --name test \
 -e S3_SECRET_KEY=my_secret_key \
 -e S3_HOST=s3.amazonaws.com \
 -e S3_HOST_BUCKET="%(bucket)s.s3.amazonaws.com" \
+-e EMAIL_HOST=172.17.0.1 \
+-e EMAIL_FROM=info@example.com \
+-e EMAIL_TO=alice@example.com,bob@example.com \
 -ti kupnu4x/etl
