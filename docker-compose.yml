@@ -1,0 +1,32 @@
+version: '3'
+services:
+  query1tos3:
+    build: .
+    env_file:
+      - .env
+    environment:
+      MYSQL_QUERY: |-
+        select stores.id as store_id
+        , r.name as retailer_name
+        , full_address
+        from stores
+        join spree_retailers r on r.id = retailer_id
+        join spree_addresses adr on adr.id = location_id;
+      S3_FILE_PATH: s3://test-sbermarket/query1/query1-dump.csv.gz
+  query2tos3:
+    build: .
+    env_file:
+      - .env
+    environment:
+      MYSQL_QUERY: |-
+        select offers.product_id, offers.name, cat.icon_file_name, cat.name as cat_name, super_cat.name as super_cat_name, spree_retailers.short_name
+        from offers
+        join spree_products as p on p.id = offers.product_id
+        join spree_variants on p.id = spree_variants.product_id
+        join spree_products_taxons on spree_products_taxons.product_id = p.id
+        join spree_taxons as cat on cat.id = spree_products_taxons.taxon_id
+        join spree_taxons as super_cat on cat.parent_id = super_cat.id
+        join spree_retailers on spree_retailers.id = retailer_id
+        left join spree_assets as image on image.viewable_type = 'Spree::Variant' and image.viewable_id = spree_variants.id
+        where offers.deleted_at is null;
+      S3_FILE_PATH: s3://test-sbermarket/query2/query2-dump.csv.gz
