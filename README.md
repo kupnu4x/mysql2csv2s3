@@ -2,6 +2,7 @@
 ```bash
 cp .env.example .env
 vi .env
+docker-compose build
 crontab -e
 ```
 ```cron
@@ -37,5 +38,6 @@ docker run --rm --name test \
 ```bash
 cp .env.example .env
 vi .env
+docker-compose build
 docker-compose up
 ```
